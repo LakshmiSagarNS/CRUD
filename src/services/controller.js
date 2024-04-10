@@ -14,13 +14,13 @@ const getDataById =(req,res)=>{
     });
 };
 const addData=(req,res)=>{
-    const{id,dataset_id,name}=req.body;
+    const data=req.body;
     // check if id exist
-    pool.query(queries.checkIdExists,[id],(error,results)=>{
+    pool.query(queries.checkIdExists,parseInt([data.id]),(error,results)=>{
         if(results.rows.length){
             res.send("id already exist");
         }
-    pool.query(queries.addData,[id,dataset_id,name],(error,results)=>{
+    pool.query(queries.addData,[parseInt(data.id), data.dataset_id,data.type,data.name,data.validation_config,data.extraction_config,data.dedup_config,data.data_schema, data.denorm_config, data.router_config, data.dataset_config, data.tags, data.data_version, data.status,data.created_by, data.updated_by,data.created_date,data.updated_date,data.published_date],(error,results)=>{
         if(error) throw error;
         res.status(201).send("data created successfully");
     }
