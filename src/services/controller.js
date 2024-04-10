@@ -1,7 +1,7 @@
 const pool = require('../config/db.js');
 const queries = require('./queries');
 const getData = (req, res)=> {
-    pool.query(queries.getdata, (error, results) => {
+    pool.query(queries.getData, (error, results) => {
         if (error) throw error;
         res.status(200).json(results.rows);
     });
